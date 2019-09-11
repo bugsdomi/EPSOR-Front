@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component, Fragment } from 'react';
 
-class ProductForm extends Component{
+export default class ProductForm extends Component{
   constructor(){
     super();
     this.state = {
@@ -27,25 +27,24 @@ class ProductForm extends Component{
 
   render(){
     return(
-      <div>
-        <h1>Liste des produits</h1>
+      <Fragment>
+        <p></p>
+        <h3>Détail produit</h3>
         <form>
           <input 
             value={this.state.userInput} 
             type="text" 
-            placeHolder="Nom"
+            placehholder="Nom"
             onChange={this.onChange}/>
           {/* <input type="number" placeHolder="Prix"/>
           <input type="select" placeHolder="Type de produit"/>
           <input type="checkBox" placeHolder="En vente"/> */}
-          <button>
-            Créer un produit
-          </button>
-
         </form>
-      </div>
+        <button>
+          Créer un produit
+        </button>
+
+      </Fragment>
     )
   }
 }
-
-export default ProductForm;

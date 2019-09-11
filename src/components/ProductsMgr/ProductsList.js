@@ -1,112 +1,76 @@
-// import React, {Component} from 'react';
 
-// Name ProductsList extends Component{
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       userInput: '',
-//       produits: this.props.produits
-//     };
+import React, { Component, Fragment } from 'react';
 
-//     this.onChange = this.onChange.bind(this);
-//     this.deleteProduct = this.deleteProduct.bind(this);
-//   }
+// -------------------------------------------------------------------------
+// Liste de produits
+// -------------------------------------------------------------------------
+export default class ProductsList extends Component {
 
-//   onChange(e){
-//     this.setState({
-//       userInput: e.target.value
-//     });  
-//   }
-
-
-//   deleteProduct(e){
-//     e.preventDefault();
-
-//     const products = this.state.produits;
-//     const index = products.indexOf(e.target.value);
-//     console.log('index : ',index,' --- e : ',e)
-//     products.splice(index,1);
-//     this.setState({
-//       produits: products
-//     });
-//   }
-
-//   listProducts(){
-//     return this.state.produits.map((product) => {
-//       return(
-//         <div key={product.id}>
-//           Nom : {product.name} - Prix : {product.price} - Type : {product.type} - En vente : {product.enable}| <button onClick={this.deleteProduct}>X</button>
-//         </div>
-//       );
-//     });
-//   }
-
-
-//   render(){
-//     return(
-//       <div>
-//         <h1>Liste des produits</h1>
-//         <div>
-//           {this.listProducts()}
-//         </div>
-//           <button onClick={this.addProduct}>Créer un produit</button>
-//       </div>
-//     )
-//   }
-// }
-
-// export default ProductsList;
-
-import React, { Component } from 'react';
-import { getProducts } from '../../services/fakeProductsService';
-
-class ProductsList extends Component {
-  state = {  
-    produits : getProducts(),
+  // -------------------------------------------------------------------------
+  // Affichage de la liste des produits dans une table
+  // -------------------------------------------------------------------------
+  listProducts(){
+    return (
+      this.props.products.map(product => (
+        <tr key={product.id} onClick={ this.props.onEdit }>
+          <th className="text-center"  scope="row" >{ product.id }</th>
+          <td className="text-center">{ product.name }</td>
+          <td className="text-center">{ product.type }</td>
+          <td className="text-right">{ product.price } €</td>
+          { this.getInSaleCellAttr(product.enable) }
+          <td className="text-center">
+            <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete }>Supprimer</button>
+          </td>
+        </tr>
+      ))
+    );
   }
 
-  renderProducts(){
-    if (this.state.produits.length === 0){
+
+  // -------------------------------------------------------------------------
+  // Détermine le messaqge, et la couleur de la cellule en fonction de l'état 
+  // du boolean "enable"
+  // -------------------------------------------------------------------------
+  getInSaleCellAttr(enable){
+  return (
+    <td className={'text-center'+(enable ? '' : ' table-danger')}>
+      {enable ? 'En vente' : 'Hors-vente'}
+    </td> 
+    )
+  }
+
+  // -------------------------------------------------------------------------
+  // Render principal de la liste de produits
+  // -------------------------------------------------------------------------
+  render() { 
+    const { length: count} = this.props.products;             // Destructuration et chgt de nom de la propriété
+
+    if (count === 0){
       return <p>Il n'y a aucun produit actuellement</p>
     }
 
     return (
-      this.state.produits.map(product => (
-        <tr key={product.id}>
-          <th className="text-center"  scope="row" >{ product.id }</th>
-          <td className="text-right">{ product.price } €</td>
-          <td className="text-center">{ product.type }</td>
-          {this.getInSale(product.enable) }
-        </tr>
-      ))
-  );
-  }
+      <Fragment>
+        <p>Il y a { count } {(count === 1 ? 'produit' : 'produits')} dans la base</p>
 
-  getInSale(enable){
-    return enable ? <td className="text-center">En vente</td>
-                  : <td className="table-danger text-center">hors-vente</td>;
-  }
-
-  render() { 
-    return (
-      <div>
-        <h3 className="text-secondary text-center">Gestion des produits</h3>
-        <table className="table table-striped table-bordered table-hover">
+        {/* <table className="table table-striped table-bordered table-hover"> */}
+        <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
               <th className="text-center" scope="col">N°</th>
-              <th className="text-center" scope="col">Prix</th>
+              <th className="text-center" scope="col">Nom</th>
               <th className="text-center" scope="col">Type</th>
+              <th className="text-center" scope="col">Prix</th>
               <th className="text-center" scope="col">En vente</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {this.renderProducts()}
+            {this.listProducts()}
           </tbody>
         </table>
-      </div>
+        { this.props.products.length === 0 && "Veuillez en créer un nouveau..." }
+      </Fragment>
     )
   }
 }
-
-export default ProductsList;
