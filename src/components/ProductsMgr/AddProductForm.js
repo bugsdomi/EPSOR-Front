@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class ProductForm extends Component{
+export default class AddProductForm extends Component{
   constructor(){
     super();
     this.state = {
@@ -27,9 +27,9 @@ export default class ProductForm extends Component{
 
   render(){
     return(
-      <Fragment>
-        <p></p>
-        <h3>Détail produit</h3>
+      <div className = { this.props.width } >
+      <br />
+        <h3>Ajouter un produit</h3>
         <form>
           <input 
             value={this.state.userInput} 
@@ -43,8 +43,7 @@ export default class ProductForm extends Component{
         <button>
           Créer un produit
         </button>
-
-      </Fragment>
+      </div>
     )
   }
 }
