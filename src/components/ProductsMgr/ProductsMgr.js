@@ -51,11 +51,6 @@ console.log('chooseProductForm - product : ',product)
       ? (                                                     // Mode ajout de Produit
         <Fragment>                                             
           <AddProductForm width={"col-3"} />
-          {/* <EditUserForm
-          editing={editing}
-          setEditing={setEditing}
-          currentUser={currentUser}
-          updateUser={updateUser}/> */}
         </Fragment>
         ) 
       : (                                                     // Mode édition de Produit
@@ -64,10 +59,6 @@ console.log('chooseProductForm - product : ',product)
             width = {"col-3"}
             product = { this.state.productToEdit }
           />
-          {/* editing={editing}
-							setEditing={setEditing}
-							currentUser={currentUser}
-							updateUser={updateUser} */}
         </Fragment>
       )
 

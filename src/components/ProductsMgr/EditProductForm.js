@@ -5,13 +5,6 @@ export default class EditProductForm extends Component{
   state = {
     product : this.props.product,
   }
-  // addProduct(e){
-  //   e.preventDefault();
-  //   this.setState({
-  //     userInput: '',
-  //     produits: [...this.state.produits, this.state.userInput]
-  //   });
-  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -67,34 +60,6 @@ console.log('handleInputChange 2A - this.state.product : ',this.state.product[na
               <button type="submit" className="btn btn-primary mt-2 ml-2 font-weight-bold" onSubmit={ event => { event.preventDefault() }}>Valider</button>
             </div>
       </form> 
-
-         {/* props.updateProduct(product.id, product)  */}
-
-
-
-      {/* <label>Username</label>
-      <input type="text" name="username" value={user.username} onChange={handleInputChange}/>
-      <button>Update user</button>
-      <button onClick={() => props.setEditing(false)} className="button muted-button">
-        Cancel
-      </button> */}
-
-
-
-        {/* <form>
-          <input 
-            value={this.state.userInput} 
-            type="text" 
-            placehholder="Nom"
-            onChange={this.onChange}/>
-          {/* <input type="number" placeHolder="Prix"/>
-          <input type="select" placeHolder="Type de produit"/>
-          <input type="checkBox" placeHolder="En vente"/> */}
-        {/* </form>
-        <br/>
-        <button>
-          Créer un produit
-        </button> */}
       </div> 
     )
   }
