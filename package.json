@@ -11,7 +11,7 @@
     "eslint": "^6.3.0",
     "font-awesome": "^4.7.0",
     "graphql": "^14.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.14.7",
     "react": "^16.9.0",
     "react-apollo": "^2.3.2",
